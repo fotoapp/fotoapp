@@ -33,3 +33,5 @@ module Foto
     # config.i18n.default_locale = :de
   end
 end
+
+require "foto/photo_uploader"
