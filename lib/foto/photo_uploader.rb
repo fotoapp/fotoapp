@@ -1,12 +1,38 @@
 module Foto
   class PhotoUploader
+    # PhotoUploader uploads a photo to a folder.
+    #
+    # It uses the created at date, read from the photo Exif data, to calculate
+    # the sub folder path, and then the md5sum of the photo for the photo
+    # filename, along with the photo file extension. It uploads the photo to
+    # this path in the supplied Fog folder.
+    #
+    # It accepts an options hash as well, allowing you to send :public? => true
+    # which will give the file a permanent, and public, url.
+    #
+    # Example Usage:
+    #
+    # => photo_store = PhotoStore.first
+    # => photo_path = Rails.root.join("spec", "fixtures", "jonmagic.jpg")
+    # => uploader = Foto::PhotoUploader.new(photo_store.folder, photo_path, :public? => true)
+    # => file = uploader.upload
+    # => file.public_url
 
-    def initialize(folder, photo_path)
-      @folder = folder
+    def initialize(folder, photo_path, options=nil)
+      @folder     = folder
       @photo_path = photo_path
+      options     = options || {}
+      @public     = options.fetch(:public?) { false }
     end
 
     attr_reader :folder, :photo_path
+
+    # Public: Is this image public?
+    #
+    # Returns a TrueClass or FalseClass.
+    def public?
+      !!@public
+    end
 
     # Public: Uploads file and returns url.
     #
@@ -15,7 +41,7 @@ module Foto
       folder.files.create({
         :key => "#{year}/#{month}/#{day}/#{md5}#{extension}",
         :body => File.open(photo_path),
-        :public => true
+        :public => public?
       })
     end
 
