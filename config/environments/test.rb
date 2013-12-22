@@ -33,4 +33,8 @@ Foto::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+
+  # Lets us hijack the session in tests.
+  # See https://github.com/railsware/rack_session_access
+  config.middleware.use RackSessionAccess::Middleware
 end
