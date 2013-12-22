@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
 
   # Public: Name of user.
   # column :name
-  validates_presence_of :name
 
   # Public: Email address for user.
   # column :email
