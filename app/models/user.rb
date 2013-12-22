@@ -1,7 +1,30 @@
 class User < ActiveRecord::Base
+
+  # https://github.com/EppO/rolify
   rolify
+
+  # Public: Name of user.
+  # column :name
   validates_presence_of :name
 
+  # Public: Email address for user.
+  # column :email
+
+  # Public: OAuth provider name.
+  # column :provider
+
+  # Public: Id of user on OAuth provider.
+  # column :uid
+
+  # Public: Created at date and time.
+  # column :created_at
+
+  # Public: Updated at date and time.
+  # column :updated_at
+
+  # Public: Create user with params from omniauth.
+  #
+  # auth - Omniauth::Hash
   def self.create_with_omniauth(auth)
     create! do |user|
       user.provider = auth['provider']
@@ -14,5 +37,4 @@ class User < ActiveRecord::Base
       end
     end
   end
-
 end
