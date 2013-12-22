@@ -16,6 +16,7 @@ gem "rolify"
 gem "sass-rails"
 gem "turbolinks"
 gem "uglifier"
+gem "unf"
 
 group :development do
   gem "better_errors"
