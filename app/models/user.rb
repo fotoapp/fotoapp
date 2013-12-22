@@ -38,4 +38,11 @@ class User < ActiveRecord::Base
       end
     end
   end
+
+  # Public: For now we only support one store per User.
+  #
+  # Returns a PhotoStore.
+  def photo_store
+    photo_stores.first
+  end
 end
