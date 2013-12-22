@@ -16,3 +16,10 @@ User.blueprint do
   uid      { "#{sn}" }
   token    { "#{sn}" }
 end
+
+PhotoStore.blueprint do
+  user            { User.make! }
+  provider_key    { "#{sn}" }
+  provider_secret { "#{sn}" }
+  folder_name     { "#{sn}-fotos" }
+end
