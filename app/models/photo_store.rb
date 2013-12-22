@@ -21,7 +21,7 @@ class PhotoStore < ActiveRecord::Base
   # Public: Folder to use at provider.
   # column :folder_name
 
-  # Public: The directory to store and retrieve files from.
+  # Public: The directory (bucket) to store and retrieve files from.
   #
   # Returns a Fog::Storage::AWS::Directory instance.
   def directory
