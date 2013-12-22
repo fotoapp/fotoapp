@@ -1,0 +1,16 @@
+<h3>S3 Configuration</h3>
+<%= form_for @photo_store, :html => {:role => "form"} do |f| %>
+  <div class="form-group">
+    <%= f.label :provider_key %>
+    <%= f.text_field :provider_key %>
+  </div>
+  <div class="form-group">
+    <%= f.label :provider_secret %>
+    <%= f.text_field :provider_secret %>
+  </div>
+  <div class="form-group">
+    <%= f.label :folder_name, "Bucket name" %>
+    <%= f.text_field :folder_name %>
+  </div>
+  <%= f.submit "Save" %>
+<% end %>

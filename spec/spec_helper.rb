@@ -42,6 +42,10 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
+  config.before(:suite) do
+    Fog.mock!
+  end
+
   config.treat_symbols_as_metadata_keys_with_true_values = true
 
   # Always render views. http://bit.ly/12Hi2pB

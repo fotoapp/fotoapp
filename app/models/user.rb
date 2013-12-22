@@ -3,6 +3,9 @@ class User < ActiveRecord::Base
   # https://github.com/EppO/rolify
   rolify
 
+  # Public: Photo stores for user.
+  has_many :photo_stores
+
   # Public: Username for user.
   # column :username
   validates_presence_of :username
@@ -42,5 +45,12 @@ class User < ActiveRecord::Base
         user.token    = auth['credentials']['token']
       end
     end
+  end
+
+  # Public: For now we only support one store per User.
+  #
+  # Returns a PhotoStore.
+  def photo_store
+    photo_stores.first
   end
 end
