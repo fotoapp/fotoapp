@@ -6,10 +6,10 @@ describe Foto::PhotoUploader do
     photo_store.connection.directories.create(:key => photo_store.folder_name)
     photo_store.folder
   }
-  let(:uploader) { Foto::PhotoUploader.new(folder, photo) }
+  let(:uploader) { Foto::PhotoUploader.new(folder, photo_path, {:public? => true}) }
 
   describe "upload jpg" do
-    let(:photo) { path_to_fixture "jonmagic.jpg" }
+    let(:photo_path) { path_to_fixture "jonmagic.jpg" }
 
     it "uploads image using date, md5sum, and extension for path" do
       expect(uploader.upload.public_url).to \
@@ -18,7 +18,7 @@ describe Foto::PhotoUploader do
   end
 
   describe "upload png" do
-    let(:photo) { path_to_fixture "jonmagic.png" }
+    let(:photo_path) { path_to_fixture "jonmagic.png" }
 
     it "uploads image using date, md5sum, and extension for path" do
       expect(uploader.upload.public_url).to \
@@ -27,7 +27,7 @@ describe Foto::PhotoUploader do
   end
 
   describe "upload png" do
-    let(:photo) { path_to_fixture "johndbritton.tiff" }
+    let(:photo_path) { path_to_fixture "johndbritton.tiff" }
 
     it "uploads image using date, md5sum, and extension for path" do
       expect(uploader.upload.public_url).to \

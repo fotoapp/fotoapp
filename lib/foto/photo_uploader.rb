@@ -1,12 +1,21 @@
 module Foto
   class PhotoUploader
 
-    def initialize(folder, photo_path)
-      @folder = folder
+    def initialize(folder, photo_path, options=nil)
+      @folder     = folder
       @photo_path = photo_path
+      options     = options || {}
+      @public     = options.fetch(:public?) { false }
     end
 
     attr_reader :folder, :photo_path
+
+    # Public: Is this image public?
+    #
+    # Returns a TrueClass or FalseClass.
+    def public?
+      !!@public
+    end
 
     # Public: Uploads file and returns url.
     #
@@ -15,7 +24,7 @@ module Foto
       folder.files.create({
         :key => "#{year}/#{month}/#{day}/#{md5}#{extension}",
         :body => File.open(photo_path),
-        :public => true
+        :public => public?
       })
     end
 
