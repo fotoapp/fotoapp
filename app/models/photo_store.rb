@@ -18,13 +18,13 @@ class PhotoStore < ActiveRecord::Base
   # column :provider_secret
   validates_presence_of :provider_secret
 
-  # Public: Folder to use at provider.
+  # Public: Root folder name to use at provider.
   # column :folder_name
 
-  # Public: The directory (bucket) to store and retrieve files from.
+  # Public: The folder (S3 bucket) to store and retrieve photos from.
   #
   # Returns a Fog::Storage::AWS::Directory instance.
-  def directory
+  def folder
     connection.directories.get(folder_name)
   end
 
