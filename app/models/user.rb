@@ -6,9 +6,12 @@ class User < ActiveRecord::Base
   # Public: Photo stores for user.
   has_many :photo_stores
 
+  # Public: Username for user.
+  # column :username
+  validates_presence_of :username
+
   # Public: Name of user.
   # column :name
-  validates_presence_of :name
 
   # Public: Email address for user.
   # column :email
@@ -18,6 +21,9 @@ class User < ActiveRecord::Base
 
   # Public: Id of user on OAuth provider.
   # column :uid
+
+  # Public: GitHub OAuth token, handy for making API requests.
+  # column :token
 
   # Public: Created at date and time.
   # column :created_at
