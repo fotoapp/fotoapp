@@ -1,7 +1,7 @@
 Foto::Application.routes.draw do
   root :to => "home#index"
 
-  resources :photo_stores, :only => [:create, :destroy]
+  resources :photo_stores, :only => [:create, :update, :destroy]
 
   get "/account" => "account#show", :as => :account
 

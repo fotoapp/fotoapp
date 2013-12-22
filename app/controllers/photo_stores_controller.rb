@@ -8,6 +8,13 @@ class PhotoStoresController < ApplicationController
     redirect_to :account
   end
 
+  def update
+    photo_store = PhotoStore.find(params[:id])
+    photo_store.update_attributes!(photo_store_params)
+
+    redirect_to :account
+  end
+
   def destroy
     photo_store = PhotoStore.find(params[:id])
     photo_store.destroy
