@@ -22,7 +22,7 @@ describe Foto::PhotoUploader do
 
     it "uploads image using date, md5sum, and extension for path" do
       expect(uploader.upload.public_url).to \
-        eq("https://foto-test.s3.amazonaws.com/2012/4/5/2796cc91eeee95410b600ae7c12952bc.png")
+        eq("https://foto-test.s3.amazonaws.com/2013/12/22/2796cc91eeee95410b600ae7c12952bc.png")
     end
   end
 
