@@ -3,6 +3,9 @@ class User < ActiveRecord::Base
   # https://github.com/EppO/rolify
   rolify
 
+  # Public: Username for user.
+  # column :username
+
   # Public: Name of user.
   # column :name
 
@@ -14,6 +17,9 @@ class User < ActiveRecord::Base
 
   # Public: Id of user on OAuth provider.
   # column :uid
+
+  # Public: GitHub OAuth token, handy for making API requests.
+  # column :token
 
   # Public: Created at date and time.
   # column :created_at
