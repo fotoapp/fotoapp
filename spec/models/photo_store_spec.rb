@@ -3,11 +3,11 @@ require 'spec_helper'
 describe PhotoStore do
   let(:photo_store) { PhotoStore.make! }
 
-  describe "#directory" do
+  describe "#folder" do
     it "returns an instance of Fog::Storage::AWS::Directory" do
       photo_store.connection.directories.create(:key => photo_store.folder_name)
 
-      expect(photo_store.directory).to be_instance_of(Fog::Storage::AWS::Directory)
+      expect(photo_store.folder).to be_instance_of(Fog::Storage::AWS::Directory)
     end
   end
 
