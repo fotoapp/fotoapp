@@ -51,3 +51,13 @@ RSpec.configure do |config|
   # Always render views. http://bit.ly/12Hi2pB
   config.render_views
 end
+
+# Public: Bootstrap fog mock with photo store folder (bucket).
+#
+# photo_store - PhotoStore object.
+#
+# Returns a PhotoStore.
+def bootstrap_fog_mock(photo_store)
+  photo_store.connection.directories.create(:key => photo_store.folder_name)
+  photo_store
+end

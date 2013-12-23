@@ -3,10 +3,7 @@ require "spec_helper"
 describe PhotoStore::Upload do
   let(:photo_path) { path_to_fixture "jonmagic.jpg" }
   let(:photo_store) { PhotoStore.make! :folder_name => "foto-test" }
-  let(:folder) {
-    photo_store.connection.directories.create(:key => photo_store.folder_name)
-    photo_store.folder
-  }
+  let(:folder) { bootstrap_fog_mock(photo_store).folder }
   let(:upload) { PhotoStore::Upload.new(folder, photo_path, {:public? => true}) }
 
   describe "#public?" do
