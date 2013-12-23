@@ -23,3 +23,11 @@ PhotoStore.blueprint do
   provider_secret { "#{sn}" }
   folder_name     { "#{sn}-fotos" }
 end
+
+Photo.blueprint do
+  filename    { "photo-#{sn}.jpg" }
+  user        { User.make! }
+  photo_store { PhotoStore.make!(:user_id => object.user.id) }
+  path        { "#{sn}/#{sn}.jpg"}
+  checksum    { "#{sn}" }
+end
