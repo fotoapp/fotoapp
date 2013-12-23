@@ -47,4 +47,19 @@ class PhotoStore < ActiveRecord::Base
     upload.save
     upload
   end
+
+  # Public: The secure expiring url for photo by path.
+  #
+  # path - String path of file in photo store folder.
+  # expires_at - Time in the future to expire the url.
+  #
+  # Returns a String.
+  def secure_url(path, expires_at=1.minute.from_now)
+    AwsSignedUrl.calculate \
+      provider_key,
+      provider_secret,
+      folder_name,
+      path,
+      expires_at
+  end
 end

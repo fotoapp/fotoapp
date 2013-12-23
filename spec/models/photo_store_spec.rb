@@ -5,7 +5,7 @@ describe PhotoStore do
 
   describe "#folder" do
     it "returns an instance of Fog::Storage::AWS::Directory" do
-      photo_store.connection.directories.create(:key => photo_store.folder_name)
+      bootstrap_fog_mock(photo_store)
 
       expect(photo_store.folder).to be_instance_of(Fog::Storage::AWS::Directory)
     end

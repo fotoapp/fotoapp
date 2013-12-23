@@ -1,4 +1,9 @@
-<p>Photos go here</p>
+<ul>
+  <% @photos.each do |photo| %>
+    <li><%= image_tag photo.url %></li>
+  <% end %>
+</ul>
+
 <%= form_for Photo.new, :multipart => true, :html => {:role => "form"} do |f| %>
   <div class="form-group">
     <%= f.label :title %>

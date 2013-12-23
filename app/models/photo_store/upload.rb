@@ -65,6 +65,13 @@ class PhotoStore
       persisted_photo.key
     end
 
+    # Public: The public url to the photo.
+    #
+    # Returns a String.
+    def public_url
+      persisted_photo.public_url
+    end
+
     # Public: The md5 checksum of the photo.
     #
     # Returns a String.

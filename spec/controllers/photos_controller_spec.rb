@@ -5,7 +5,7 @@ describe PhotosController, :authenticated => true do
   let(:photo_store) { PhotoStore.make!(:user => user) }
 
   before do
-    photo_store.connection.directories.create(:key => photo_store.folder_name)
+    bootstrap_fog_mock(photo_store)
   end
 
   describe "POST to :create" do
