@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe HomeController do
+describe HomeController, :authenticated => true do
 
   describe "GET 'index'" do
     it "returns http success" do
