@@ -1,5 +1,3 @@
-require "utf8"
-
 class Photo < ActiveRecord::Base
 
   ExtensionsByContentType = {
