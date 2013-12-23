@@ -38,15 +38,19 @@ class Photo < ActiveRecord::Base
   validates_presence_of :checksum
   validates_uniqueness_of :checksum, :scope => :user_id
 
+  # Public: Public url to photo if photo is public.
+  # column :public_url
+
   # Public: Set attributes from uploaded file.
   #
   # uploaded_file - ActionDispatch::Http::UploadedFile instance.
   def uploaded_file=(uploaded_file)
     upload = photo_store.upload(uploaded_file.path, extension(uploaded_file))
 
-    self.filename = ::Utf8.force_encoding(uploaded_file.original_filename)
-    self.checksum = upload.checksum
-    self.path     = upload.path
+    self.filename   = ::Utf8.force_encoding(uploaded_file.original_filename)
+    self.checksum   = upload.checksum
+    self.path       = upload.path
+    self.public_url = upload.public_url
   end
 
   # Public: Extension for uploaded file.
