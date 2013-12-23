@@ -1,6 +1,6 @@
-module Foto
-  class PhotoUploader
-    # PhotoUploader uploads a photo to a folder.
+class PhotoStore
+  class Upload
+    # PhotoStore::Upload uploads a photo to a photo store folder.
     #
     # It uses the created at date, read from the photo Exif data, to calculate
     # the sub folder path, and then the md5sum of the photo for the photo
@@ -19,13 +19,14 @@ module Foto
     # => file.public_url
 
     def initialize(folder, photo_path, options=nil)
-      @folder     = folder
-      @photo_path = photo_path
-      options     = options || {}
-      @public     = options.fetch(:public?) { false }
+      @folder         = folder
+      @photo_path     = photo_path
+      @options        = options || {}
+      @public         = @options.fetch(:public?) { false }
+      @uploaded_file  = nil
     end
 
-    attr_reader :folder, :photo_path
+    attr_reader :folder, :photo_path, :options
 
     # Public: Is this image public?
     #
@@ -37,12 +38,34 @@ module Foto
     # Public: Uploads file and returns url.
     #
     # Returns a Fog::Storage::AWS::File.
-    def upload
-      folder.files.create({
-        :key => "#{year}/#{month}/#{day}/#{md5}#{extension}",
+    def save
+      @uploaded_file ||= folder.files.create({
+        :key => "#{year}/#{month}/#{day}/#{checksum}#{extension}",
         :body => File.open(photo_path),
         :public => public?
       })
+    end
+
+    def uploaded_file
+      @uploaded_file || save
+    end
+
+    def key
+      uploaded_file.key
+    end
+
+    # Public: The md5 checksum of the photo.
+    #
+    # Returns a String.
+    def checksum
+      Digest::MD5.hexdigest(File.read(photo_path))
+    end
+
+    # Public: Photo filename including extension.
+    #
+    # Returns a String.
+    def filename
+      File.basename(photo_path)
     end
 
     private
@@ -68,20 +91,16 @@ module Foto
       date_time.day
     end
 
-    # Internal: The md5sum of the photo.
-    #
-    # Returns a String.
-    def md5
-      Digest::MD5.hexdigest(File.read(photo_path))
-    end
-
     # Internal: The photo file extension (jpg, png, ...).
     #
     # Returns a String.
     def extension
-      File.extname(photo_path)
+      options[:extension] || File.extname(photo_path)
     end
 
+    # Internal: Date and time image was created or modified.
+    #
+    # Returns a DateTime.
     def date_time
       @date_time ||= exif["DateTimeOriginal"] || exif["FileModifyDate"]
     end
