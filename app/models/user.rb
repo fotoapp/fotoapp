@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
   # Public: Photo stores for user.
   has_many :photo_stores
 
+  # Public: Photos for this user.
+  has_many :photos
+
   # Public: Username for user.
   # column :username
   validates_presence_of :username

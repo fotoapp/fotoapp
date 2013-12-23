@@ -32,6 +32,20 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # Internal: PhotoStore required for current user.
+  def photo_store_required!
+    if !current_photo_store
+      redirect_to account_path, :alert => "You need to configure S3 for your account."
+    end
+  end
+
+  # Internal: The photo store for the current user if it exists.
+  #
+  # Returns a PhotoStore or nil.
+  def current_photo_store
+    current_user.photo_store
+  end
+
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_path, :alert => exception.message
   end
