@@ -1,10 +1,13 @@
 require 'spec_helper'
 
 describe Photo do
+  let(:photo_store) { PhotoStore.make! }
+  let(:user) { photo_store.user }
+
   describe "User and checksum" do
     it "must be unique" do
       attributes = {
-        :user     => User.make!,
+        :user     => user,
         :checksum => SecureRandom.hex
       }
 
@@ -19,7 +22,7 @@ describe Photo do
   describe "PhotoStore and path" do
     it "must be unique" do
       attributes = {
-        :photo_store => PhotoStore.make!,
+        :photo_store => photo_store,
         :path        => "path/to/image.jpg"
       }
 
