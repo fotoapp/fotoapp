@@ -38,4 +38,13 @@ class PhotoStore < ActiveRecord::Base
                       :aws_secret_access_key => provider_secret
                     })
   end
+
+  # Public: Uploads file and returns uploader.
+  #
+  # Returns a PhotoStore::Upload.
+  def upload(path, extension)
+    upload = Upload.new(self.folder, path, {:extension => extension})
+    upload.save
+    upload
+  end
 end
