@@ -46,7 +46,7 @@ class Photo < ActiveRecord::Base
 
     self.filename = ::Utf8.force_encoding(uploaded_file.original_filename)
     self.checksum = upload.checksum
-    self.path     = upload.uploaded_file.key
+    self.path     = upload.path
   end
 
   # Public: Extension for uploaded file.

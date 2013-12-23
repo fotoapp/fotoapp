@@ -8,21 +8,20 @@ class PhotoStore
     # this path in the supplied Fog folder.
     #
     # It accepts an options hash as well, allowing you to send :public? => true
-    # which will give the file a permanent, and public, url.
+    # which will give the file a permanent, and public, url. You can also send
+    # :extension => ".jpg" to manually set the extension.
     #
     # Example Usage:
     #
     # => photo_store = PhotoStore.first
     # => photo_path = Rails.root.join("spec", "fixtures", "jonmagic.jpg")
-    # => uploader = Foto::PhotoUploader.new(photo_store.folder, photo_path, :public? => true)
-    # => file = uploader.upload
-    # => file.public_url
+    # => upload = PhotoStore::Upload.new(photo_store.folder, photo_path, :public? => true)
+    # => upload.persisted_photo.public_url
 
     def initialize(folder, photo_path, options=nil)
       @folder         = folder
       @photo_path     = photo_path
       @options        = options || {}
-      @public         = @options.fetch(:public?) { false }
       @uploaded_file  = nil
     end
 
@@ -32,26 +31,38 @@ class PhotoStore
     #
     # Returns a TrueClass or FalseClass.
     def public?
-      !!@public
+      !!options[:public?]
     end
 
     # Public: Uploads file and returns url.
     #
-    # Returns a Fog::Storage::AWS::File.
+    # Returns self.
     def save
-      @uploaded_file ||= folder.files.create({
+      return self if defined?(@persisted_photo)
+
+      @persisted_photo ||= folder.files.create({
         :key => "#{year}/#{month}/#{day}/#{checksum}#{extension}",
         :body => File.open(photo_path),
         :public => public?
       })
+
+      self
     end
 
-    def uploaded_file
-      @uploaded_file || save
+    # Public: Persisted photo. Attempts to save if not already persisted.
+    #
+    # Returns a Fog::Storage::AWS::File.
+    def persisted_photo
+      save unless defined?(@persisted_photo)
+
+      @persisted_photo
     end
 
-    def key
-      uploaded_file.key
+    # Public: The path to the photo in the photo store folder.
+    #
+    # Returns a String.
+    def path
+      persisted_photo.key
     end
 
     # Public: The md5 checksum of the photo.
@@ -59,13 +70,6 @@ class PhotoStore
     # Returns a String.
     def checksum
       Digest::MD5.hexdigest(File.read(photo_path))
-    end
-
-    # Public: Photo filename including extension.
-    #
-    # Returns a String.
-    def filename
-      File.basename(photo_path)
     end
 
     private
