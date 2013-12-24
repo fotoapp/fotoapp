@@ -38,13 +38,21 @@ class PhotoStore
     #
     # Returns self.
     def save
-      return self if defined?(@persisted_photo)
+      unless defined?(@persisted_photo)
+        @persisted_photo ||= folder.files.create({
+          :key => "#{year}/#{month}/#{day}/#{checksum}#{extension}",
+          :body => File.open(photo_path),
+          :public => public?
+        })
+      end
 
-      @persisted_photo ||= folder.files.create({
-        :key => "#{year}/#{month}/#{day}/#{checksum}#{extension}",
-        :body => File.open(photo_path),
-        :public => public?
-      })
+      unless defined?(@persisted_thumbnail)
+        @persisted_thumbnail ||= folder.files.create({
+          :key => "thumbnails/#{year}/#{month}/#{day}/#{checksum}#{extension}",
+          :body => File.open(Thumbnail.new(photo_path).generate),
+          :public => public?
+        })
+      end
 
       self
     end
@@ -56,6 +64,15 @@ class PhotoStore
       save unless defined?(@persisted_photo)
 
       @persisted_photo
+    end
+
+    # Public: Persisted thumbnail. Attempts to save if not already persisted.
+    #
+    # Returns a Fog::Storage::AWS::File.
+    def persisted_thumbnail
+      save unless defined?(@persisted_thumbnail)
+
+      @persisted_thumbnail
     end
 
     # Public: The path to the photo in the photo store folder.

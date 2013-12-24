@@ -79,3 +79,9 @@ pickle-email-*.html
 **.swp
 
 .env
+
+*.tiff-preview
+
+*.jpg-preview
+
+*.png-preview
