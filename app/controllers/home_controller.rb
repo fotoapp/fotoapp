@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
-  before_filter :authenticate_user!
-
   def index
-    @photos = current_user.photos.last(16)
+    if user_signed_in?
+      @photos = current_user.photos.last(16)
+    end
   end
 end
