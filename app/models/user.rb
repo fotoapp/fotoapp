@@ -1,8 +1,5 @@
 class User < ActiveRecord::Base
 
-  # https://github.com/EppO/rolify
-  rolify
-
   # Public: Photo stores for user.
   has_many :photo_stores
 

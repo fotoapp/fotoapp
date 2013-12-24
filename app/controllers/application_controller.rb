@@ -45,8 +45,4 @@ class ApplicationController < ActionController::Base
   def current_photo_store
     current_user.photo_store
   end
-
-  rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_path, :alert => exception.message
-  end
 end
