@@ -36,9 +36,6 @@ class Photo < ActiveRecord::Base
   validates_presence_of :checksum
   validates_uniqueness_of :checksum, :scope => :user_id
 
-  # Public: Public url to photo if photo is public.
-  # column :public_url
-
   # Public: Set attributes from uploaded file.
   #
   # uploaded_file - ActionDispatch::Http::UploadedFile instance.
@@ -48,7 +45,6 @@ class Photo < ActiveRecord::Base
     self.filename   = ::Utf8.force_encoding(uploaded_file.original_filename)
     self.checksum   = upload.checksum
     self.path       = upload.path
-    self.public_url = upload.public_url
   end
 
   # Public: Extension for uploaded file.
@@ -64,7 +60,7 @@ class Photo < ActiveRecord::Base
   #
   # Returns a String.
   def url
-    public_url || secure_url
+    secure_url
   end
 
   # Public: Persisted photo object from Fog.
