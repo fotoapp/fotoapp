@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
   <ul>
     <% @photos.each do |photo| %>
-      <li><%= image_tag photo.url %></li>
+      <li><%= link_to image_tag(photo.thumbnail_url), photo.url %></li>
     <% end %>
   </ul>
 

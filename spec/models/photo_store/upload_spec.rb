@@ -38,6 +38,9 @@ describe PhotoStore::Upload do
     it "uploads image using date, md5sum, and extension for path" do
       expect(upload.persisted_photo.public_url).to \
         eq("https://foto-test.s3.amazonaws.com/2013/12/2/8079bd4fd6d99b2a9891763df1a4cda9.jpg")
+
+      expect(upload.persisted_thumbnail.public_url).to \
+        eq("https://foto-test.s3.amazonaws.com/thumbnails/2013/12/2/8079bd4fd6d99b2a9891763df1a4cda9.jpg")
     end
   end
 
@@ -47,6 +50,9 @@ describe PhotoStore::Upload do
     it "uploads image using date, md5sum, and extension for path" do
       expect(upload.persisted_photo.public_url).to \
         eq("https://foto-test.s3.amazonaws.com/2013/12/22/2796cc91eeee95410b600ae7c12952bc.png")
+
+      expect(upload.persisted_thumbnail.public_url).to \
+        eq("https://foto-test.s3.amazonaws.com/thumbnails/2013/12/22/2796cc91eeee95410b600ae7c12952bc.png")
     end
   end
 
@@ -56,6 +62,9 @@ describe PhotoStore::Upload do
     it "uploads image using date, md5sum, and extension for path" do
       expect(upload.persisted_photo.public_url).to \
         eq("https://foto-test.s3.amazonaws.com/2013/8/24/b2816cd510693da11786a9a8827d9254.tiff")
+
+      expect(upload.persisted_thumbnail.public_url).to \
+        eq("https://foto-test.s3.amazonaws.com/thumbnails/2013/8/24/b2816cd510693da11786a9a8827d9254.tiff")
     end
   end
 end

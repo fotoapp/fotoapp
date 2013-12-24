@@ -56,11 +56,18 @@ class Photo < ActiveRecord::Base
     ExtensionsByContentType[uploaded_file.content_type]
   end
 
-  # Public: The public url or a secure expiring url for the photo.
+  # Public: Photo url, public or secure (expiring) url.
   #
   # Returns a String.
   def url
-    secure_url
+    secure_url(path)
+  end
+
+  # Public: Thumbnail url, public or secure (expiring) url.
+  #
+  # Returns a String.
+  def thumbnail_url
+    secure_url("thumbnails/#{path}")
   end
 
   # Public: Persisted photo object from Fog.
@@ -75,7 +82,7 @@ class Photo < ActiveRecord::Base
   # expires_at - Time in the future to expire the url.
   #
   # Returns a String.
-  def secure_url(expires_at=1.minute.from_now)
-    photo_store.secure_url(path, expires_at)
+  def secure_url(photo_path, expires_at=1.minute.from_now)
+    photo_store.secure_url(photo_path, expires_at)
   end
 end
