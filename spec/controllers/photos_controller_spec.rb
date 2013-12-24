@@ -29,7 +29,7 @@ describe PhotosController, :authenticated => true do
       photo = user.photos.first
       expect(photo).to be_present
       expect(photo.checksum).to eq("2796cc91eeee95410b600ae7c12952bc")
-      expect(photo.path).to eq("2013/12/22/2796cc91eeee95410b600ae7c12952bc.png")
+      expect(photo.path).to match("2796cc91eeee95410b600ae7c12952bc.png")
       expect(photo.photo_store).to eq(photo_store)
 
       uploaded_photo = photo_store.folder.files.get(photo.path)
