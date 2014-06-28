@@ -262,7 +262,6 @@ DEPENDENCIES
   jquery-rails
   machinist
   mini_exiftool_vendored
-  omniauth
   omniauth-github
   pg
   pry
