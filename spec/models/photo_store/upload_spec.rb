@@ -48,6 +48,8 @@ describe PhotoStore::Upload do
     let(:photo_path) { path_to_fixture "jonmagic.png" }
 
     it "uploads image using date, md5sum, and extension for path" do
+      upload.stub(:date_time => Time.parse("2013-12-22"))
+
       expect(upload.persisted_photo.public_url).to \
         eq("https://foto-test.s3.amazonaws.com/2013/12/22/2796cc91eeee95410b600ae7c12952bc.png")
 
