@@ -45,7 +45,7 @@ rake db:create db:migrate db:test:prepare
 
 Start the server with `rails server` or the console with `rails console`.
 
-Run the tests with `rake` or `guard` for continuous testing.
+Run the tests with `rake`.
 
 ## Documentation and Support
 
