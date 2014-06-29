@@ -34,6 +34,7 @@ group :development, :test do
   gem "minitest-rails-capybara"
   gem "dotenv-rails"
   gem "pry"
+  gem "rack_session_access"
   gem "rspec-rails"
 end
 
@@ -46,5 +47,4 @@ group :test do
   gem "database_cleaner", "1.0.1"
   gem "email_spec"
   gem "machinist"
-  gem "rack_session_access"
 end
