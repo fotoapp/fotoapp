@@ -19,8 +19,6 @@ gem "unf"
 group :development do
   gem "better_errors"
   gem "binding_of_caller", :platforms => [:mri_19, :mri_20, :rbx]
-  gem "guard-bundler"
-  gem "guard-rails"
   gem "hub", :require => nil
   gem "quiet_assets"
   gem "rails_layout"
@@ -30,8 +28,8 @@ group :development do
 end
 
 group :development, :test do
-  gem "minitest-rails-capybara"
   gem "dotenv-rails"
+  gem "minitest-rails-capybara"
   gem "mocha"
   gem "pry"
   gem "rack_session_access"
