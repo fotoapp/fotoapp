@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   # Internal: PhotoStore required for current user.
   def photo_store_required!
     if !current_photo_store
-      redirect_to account_path, :alert => "You need to configure S3 for your account."
+      redirect_to account_path, :alert => "Please configure your account with your S3 information."
     end
   end
 
