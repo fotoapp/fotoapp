@@ -1,9 +1,4 @@
 class SessionsController < ApplicationController
-
-  def new
-    redirect_to '/auth/github'
-  end
-
   def create
     auth = request.env["omniauth.auth"]
     user = User.where(:provider => auth['provider'],
