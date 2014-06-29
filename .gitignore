@@ -85,3 +85,5 @@ pickle-email-*.html
 *.jpg-preview
 
 *.png-preview
+
+public/photos
