@@ -1,6 +1,6 @@
-jpg:
-  filename: photo.jpg
+foo:
+  filename: foo.jpg
   user: jonmagic
   photo_store: aws
-  path: foo/photo.jpg
-  checksum: 607c83283896e792a3a32bcbea89d1db
+  path: foo.jpg
+  checksum: 9d6933b234c26e6567fed2dcd19350f1
