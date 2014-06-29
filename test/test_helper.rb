@@ -15,8 +15,12 @@ class ActiveSupport::TestCase
   # -- they do not yet inherit this setting
   fixtures :photo_stores, :photos, :users
 
-  # Add more helper methods to be used by all tests here...
   include FixturesHelper
+end
+
+class ActionController::TestCase
+  include Capybara::DSL
+  include AuthenticationHelper
 end
 
 # Put Fog in mock mode.
