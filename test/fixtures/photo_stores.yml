@@ -1,0 +1,5 @@
+aws:
+  user: jonmagic
+  provider_key: fake_provider_key
+  provider_secret: fake_provider_secret
+  folder_name: foto-test

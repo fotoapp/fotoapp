@@ -40,12 +40,12 @@ The application is configured to send email using a Gmail account.
 git clone https://github.com/fotoapp/fotoapp.git
 cd fotoapp
 bundle
-rake db:create db:migrate db:test:prepare
+rake db:create db:migrate
 ```
 
 Start the server with `rails server` or the console with `rails console`.
 
-Run the tests with `rake` or `guard` for continuous testing.
+Run the tests with `rake`.
 
 ## Documentation and Support
 

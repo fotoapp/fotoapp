@@ -5,7 +5,7 @@ module FixturesHelper
   #
   # Returns a Pathname.
   def path_to_fixture(filename)
-    Rails.root.join("spec", "fixtures", "#{filename}")
+    Rails.root.join("test", "fixtures", "#{filename}")
   end
   # Public: Loads fixture for use in specs.
   #
@@ -53,8 +53,4 @@ module FixturesHelper
     }
     ActionDispatch::Http::UploadedFile.new(options)
   end
-end
-
-RSpec.configure do |c|
-  c.include FixturesHelper
 end

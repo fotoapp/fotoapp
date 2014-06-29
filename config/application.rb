@@ -8,18 +8,6 @@ Bundler.require(:default, Rails.env)
 
 module Foto
   class Application < Rails::Application
-
-    # don't generate RSpec tests for views and helpers
-    config.generators do |g|
-
-      g.test_framework :rspec, fixture: true
-
-      g.fixture_replacement :machinist
-
-      g.view_specs false
-      g.helper_specs false
-    end
-
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

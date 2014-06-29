@@ -19,31 +19,23 @@ gem "unf"
 group :development do
   gem "better_errors"
   gem "binding_of_caller", :platforms => [:mri_19, :mri_20, :rbx]
-  gem "guard-bundler"
-  gem "guard-rails"
-  gem "guard-rspec"
   gem "hub", :require => nil
   gem "quiet_assets"
   gem "rails_layout"
   gem "rb-fchange", :require => false
   gem "rb-fsevent", :require => false
   gem "rb-inotify", :require => false
+  gem "spring"
 end
 
 group :development, :test do
   gem "dotenv-rails"
+  gem "minitest-rails-capybara"
+  gem "mocha"
   gem "pry"
-  gem "rspec-rails"
+  gem "rack_session_access"
 end
 
 group :production do
   gem "unicorn"
-end
-
-group :test do
-  gem "capybara"
-  gem "database_cleaner", "1.0.1"
-  gem "email_spec"
-  gem "machinist"
-  gem "rack_session_access"
 end
