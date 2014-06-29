@@ -11,12 +11,11 @@ class ActiveSupport::TestCase
   # -- they do not yet inherit this setting
   fixtures :photo_stores, :photos, :users
 
-  def setup
-    Fog.mock!
-  end
-
   # Add more helper methods to be used by all tests here...
 end
+
+# Put Fog in mock mode.
+Fog.mock!
 
 # Public: Bootstrap fog mock with photo store folder (bucket).
 #
