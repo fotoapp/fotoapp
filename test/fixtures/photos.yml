@@ -1,0 +1,6 @@
+jpg:
+  filename: photo.jpg
+  user: jonmagic
+  photo_store: aws
+  path: foo/photo.jpg
+  checksum: 607c83283896e792a3a32bcbea89d1db
