@@ -1,12 +1,11 @@
 <ul class="nav navbar-nav">
-  <li><%= link_to "Home", root_path, :class => 'brand' %></li>
-
+  <li><%= link_to "Foto", root_path, :class => 'brand' %></li>
+  <li><%= link_to "Upload", new_photo_path %></li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
   <% if user_signed_in? %>
-    <li><%= link_to "Account", account_path %></li>
-  <% end %>
-
-  <% if user_signed_in? %>
-    <li><%= link_to 'Logout', signout_path %></li>
+    <li><%= link_to "@#{current_user.username}", account_path %></li>
+    <li><%= link_to 'Signout', signout_path %></li>
   <% else %>
     <li><%= link_to 'Signin', "/auth/github" %></li>
   <% end %>

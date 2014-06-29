@@ -1,23 +1,5 @@
-<% if user_signed_in? %>
-  <ul>
-    <% @photos.each do |photo| %>
-      <li><%= link_to image_tag(photo.thumbnail_url), photo.url %></li>
-    <% end %>
-  </ul>
-
-  <%= form_for Photo.new, :multipart => true, :html => {:role => "form"} do |f| %>
-    <div class="form-group">
-      <%= f.label :title %>
-      <%= f.text_field :title %>
-    </div>
-    <div class="form-group">
-      <%= f.label :description %>
-      <%= f.text_area :description %>
-    </div>
-    <div class="form-group">
-      <%= f.label :file %>
-      <%= f.file_field :file %>
-    </div>
-    <%= f.submit "Upload" %>
+<ul>
+  <% @photos.each do |photo| %>
+    <li><%= link_to image_tag(photo.thumbnail_url), photo.url %></li>
   <% end %>
-<% end %>
+</ul>
