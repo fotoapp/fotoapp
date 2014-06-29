@@ -33,6 +33,7 @@ end
 group :development, :test do
   gem "minitest-rails-capybara"
   gem "dotenv-rails"
+  gem "mocha"
   gem "pry"
   gem "rack_session_access"
   gem "rspec-rails"
