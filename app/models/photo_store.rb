@@ -32,11 +32,21 @@ class PhotoStore < ActiveRecord::Base
   #
   # Returns a Fog::Storage::AWS instance.
   def connection
-    @connection ||= Fog::Storage.new({
-                      :provider => "AWS",
-                      :aws_access_key_id => provider_key,
-                      :aws_secret_access_key => provider_secret
-                    })
+    @connection ||= begin
+      if Rails.env.development?
+        Fog::Storage.new({
+          :provider   => 'Local',
+          :local_root => Rails.root.join("public"),
+          :endpoint   => "http://localhost:3000/photos"
+        })
+      else
+        Fog::Storage.new({
+          :provider => "AWS",
+          :aws_access_key_id => provider_key,
+          :aws_secret_access_key => provider_secret
+        })
+      end
+    end
   end
 
   # Public: Uploads file and returns uploader.
@@ -55,11 +65,15 @@ class PhotoStore < ActiveRecord::Base
   #
   # Returns a String.
   def secure_url(path, expires_at=1.minute.from_now)
-    AwsSignedUrl.calculate \
-      provider_key,
-      provider_secret,
-      folder_name,
-      path,
-      expires_at
+    if Rails.env.development?
+      "/#{folder_name}/#{path}"
+    else
+      AwsSignedUrl.calculate \
+        provider_key,
+        provider_secret,
+        folder_name,
+        path,
+        expires_at
+    end
   end
 end
