@@ -1,5 +1,8 @@
-<ul>
-  <% @photos.each do |photo| %>
-    <li><%= link_to image_tag(photo.thumbnail_url), photo.url %></li>
+<div class="row">
+  <% @photos.each_with_index do |photo, index| %>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 thumbnail-container">
+      <%= render :partial => "photos/photo", :locals => {:photo => photo} %>
+    </div>
+    <%= clear_fixer(index) %>
   <% end %>
-</ul>
+</div>
