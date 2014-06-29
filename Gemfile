@@ -31,6 +31,7 @@ group :development do
 end
 
 group :development, :test do
+  gem "minitest-rails-capybara"
   gem "dotenv-rails"
   gem "pry"
   gem "rspec-rails"
