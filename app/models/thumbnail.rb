@@ -9,7 +9,7 @@ class Thumbnail
   #
   # Returns a String.
   def generate
-    `convert #{photo_path} -thumbnail 512x512 #{thumbnail_path}`
+    `convert #{photo_path} -thumbnail 512x512^ -gravity center -extent 512x512 #{thumbnail_path}`
 
     thumbnail_path
   end
