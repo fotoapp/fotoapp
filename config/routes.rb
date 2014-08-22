@@ -2,7 +2,7 @@ Foto::Application.routes.draw do
   root :to => "home#index"
 
   resources :photo_stores, :only => [:create, :update, :destroy]
-  resources :photos, :only => [:create]
+  resources :photos, :only => [:new, :create]
 
   get "/account" => "account#show", :as => :account
 

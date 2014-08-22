@@ -10,13 +10,17 @@
   </head>
   <body>
     <header>
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <%= render 'layouts/navigation' %>
-      </div>
+      <nav class="navbar navbar-default navbar-main" role="navigation">
+        <div class="container-fluid">
+          <%= render 'layouts/navigation' %>
+        </div>
+      </nav>
     </header>
     <main role="main">
-       <%= render 'layouts/messages' %>
-       <%= yield %>
+      <div class="container-fluid">
+        <%= render 'layouts/messages' %>
+        <%= yield %>
+      </div>
     </main>
   </body>
 </html>

@@ -20,14 +20,14 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user!
     if !current_user
-      redirect_to root_url, :alert => 'You need to sign in for access to this page.'
+      redirect_to signin_path, :alert => 'Please signin with GitHub to continue using the Foto application.'
     end
   end
 
   # Internal: PhotoStore required for current user.
   def photo_store_required!
     if !current_photo_store
-      redirect_to account_path, :alert => "You need to configure S3 for your account."
+      redirect_to account_path, :alert => "Please configure your account with your S3 information."
     end
   end
 
